@@ -1,20 +1,22 @@
 {% extends "./base.html" %}
 
 {% block body %}
-<div class="container-fluid">
+<div class="container-fluid mt-3">
     <div class="row">
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="card-title">test</div>
-                </div>
-                <img src="./profile-img.jpg" class="img-fluid" alt="Responsive image">
+        {% for Diary in DiaryList %}
+        <div class="col-md-4">
+            <div class="card shadow mt-5">
+                <div class="card-header">
+                    <span class="font-weight-bold" style="font-size:20px; letter-spacing:1.4px;">{{Diary.title}}</span>
+                  </div>
+                <img src="{{ Diary.image.url }}" class="img-fluid" alt="Responsive image">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Date</li>
-                    <li class="list-group-item">Author</li>
+                    <li class="list-group-item">Date:<span class="ml-2">{{ Diary.date }}</span></li>
+                    <li class="list-group-item">Author:<span class="ml-2">{{ Diary.author }}</span></li>
                   </ul>
             </div>
         </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
