@@ -9,3 +9,4 @@ class Diary(models.Model):
     date = models.DateField()
     author = models.CharField(max_length=100)
     content = models.TextField()
+    image = models.ImageField(default="default.jpg",upload_to="diary_images/")
