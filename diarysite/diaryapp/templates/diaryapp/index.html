@@ -2,31 +2,52 @@
 
 {% block body %}
 <!--modal diaryの追加フォーム-->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    Launch demo modal
-  </button>
-  
   <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="AddDiaryForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Add Diary</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+        <form method="POST" action="">
+            <div class="modal-body">
+                <div class="form-group">
+                  <label for="title">DiaryTitle</label>
+                  <span class="badge badge-danger">Require</span>
+                  <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                </div>
+                <div class="form-group">
+                  <label for="author">Author Name</label>
+                  <input type="text" class="form-control" id="author" placeholder="Enter AuthorName">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <span class="badge badge-danger">Require</span>
+                    <textarea class="form-control" id="content" placeholder="Enter Content" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Select Diary Image</label>
+                    <span class="badge badge-danger">Require</span>
+                    <input type="file" class="form-control-file" id="image">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Diary</button>
+            </div>
+        </form>
       </div>
     </div>
   </div>
-  
+
+<div class="container mt-5" style="text-align:center;">
+    <button type="button" class="btn btn-info rounded-pill" data-toggle="modal" data-target="#AddDiaryForm">
+        <span style="letter-spacing:1.4px; font-size:35px;">日記を追加してみる</span>
+    </button>
+</div>
 <!-- index -->
 <div class="container-fluid my-4 px-5">
 
