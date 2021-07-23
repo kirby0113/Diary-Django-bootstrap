@@ -1,19 +1,60 @@
 {% extends "./base.html" %}
 
 {% block body %}
-<div class="container-fluid mt-3">
-    <div class="row">
+<!--modal diaryの追加フォーム-->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- index -->
+<div class="container-fluid my-4 px-5">
+
+    <div class="row mx-5">
         {% for Diary in DiaryList %}
         <div class="col-md-4">
             <div class="card shadow mt-5">
                 <div class="card-header">
                     <span class="font-weight-bold" style="font-size:20px; letter-spacing:1.4px;">{{Diary.title}}</span>
-                  </div>
+                </div>
                 <img src="{{ Diary.image.url }}" class="img-fluid" alt="Responsive image">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Date:<span class="ml-2">{{ Diary.date }}</span></li>
                     <li class="list-group-item">Author:<span class="ml-2">{{ Diary.author }}</span></li>
-                  </ul>
+                </ul>
+                <div class="card-footer">
+                    <div class="row my-2">
+                        <div class="col-md-4 my-2" style="text-align:center;">
+                            <a href="#"class="btn btn-primary text-light">見てみる</a>
+                        </div>
+                        <div class="col-md-4 my-2" style="text-align:center;">
+                            <a href="#" class="btn btn-warning">編集する</a>
+                        </div>
+                        <div class="col-md-4 my-2" style="text-align:center;">
+                            <a href="#" class="btn btn-danger text-light">削除する</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
