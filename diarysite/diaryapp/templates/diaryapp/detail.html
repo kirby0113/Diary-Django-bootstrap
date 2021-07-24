@@ -1,5 +1,35 @@
 {% extends "./base.html" %}
 
 {% block body %}
-
+<div class="container">
+        <div class="card shadow my-5 mx-4" style="vertical-align:middle;">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="font-weight-bold" style="font-size:20px; letter-spacing:1.4px;">{{diary.title}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" style="text-align:center;">
+                    <img src="{{ diary.image.url }}" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="col-md-7 my-3 mx-3">
+                    <p class="text-justify" style="line-height:3; text-decoration:underline; font-size:24px;">
+                        {{diary.content}}
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6 my-1">
+                        <span class="font-weight-bold text-right" style="font-size:15px; letter-spacing:1.2px;">Author:{{diary.author}}</span>
+                    </div>
+                    <div class="col-md-6 my-1">
+                        <span class="font-weight-bold text-right" style="font-size:15px; letter-spacing:1.2px;">Date:{{diary.date}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
 {% endblock %}
