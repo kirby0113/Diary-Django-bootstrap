@@ -5,5 +5,6 @@ from diaryapp import views
 app_name = "diaryapp"
 
 urlpatterns = [
-    path("",views.index)
+    path("",views.index,name="index"),
+    path("detail/<int:id>/",views.detail,name="detail")
 ]

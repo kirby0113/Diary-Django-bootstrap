@@ -1,19 +1,82 @@
 {% extends "./base.html" %}
 
 {% block body %}
-<div class="container-fluid mt-3">
-    <div class="row">
+<!--modal diaryの追加フォーム-->
+  <!-- Modal -->
+  <div class="modal fade" id="AddDiaryForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Add Diary</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-body">
+                <div class="form-group">
+                  <label for="title">DiaryTitle</label>
+                  <span class="badge badge-danger">Require</span>
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title">
+                </div>
+                <div class="form-group">
+                  <label for="author">Author Name</label>
+                  <input type="text" class="form-control" id="author" name="author" placeholder="Enter AuthorName">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <span class="badge badge-danger">Require</span>
+                    <textarea class="form-control" id="content" name="content" placeholder="Enter Content" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Select Diary Image</label>
+                    <span class="badge badge-danger">Require</span>
+                    <input type="file" class="form-control-file" name="image" id="image">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Diary</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<div class="container mt-5" style="text-align:center;">
+    <button type="button" class="btn btn-info rounded-pill" data-toggle="modal" data-target="#AddDiaryForm">
+        <span style="letter-spacing:1.4px; font-size:35px;">日記を追加してみる</span>
+    </button>
+</div>
+<!-- index -->
+<div class="container-fluid my-4 px-sm-5">
+
+    <div class="row mx-md-5">
         {% for Diary in DiaryList %}
-        <div class="col-md-4">
-            <div class="card shadow mt-5">
+        <div class="col-xl-4 col-sm-6 align-self-center">
+            <div class="card shadow my-5" style="vertical-align:middle;">
                 <div class="card-header">
                     <span class="font-weight-bold" style="font-size:20px; letter-spacing:1.4px;">{{Diary.title}}</span>
-                  </div>
+                </div>
                 <img src="{{ Diary.image.url }}" class="img-fluid" alt="Responsive image">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Date:<span class="ml-2">{{ Diary.date }}</span></li>
                     <li class="list-group-item">Author:<span class="ml-2">{{ Diary.author }}</span></li>
-                  </ul>
+                </ul>
+                <div class="card-footer">
+                    <div class="row my-2">
+                        <div class="col-xl-4 col-md-6 my-2" style="text-align:center;">
+                            <a href="{% url 'diaryapp:detail' Diary.id %}"class="btn btn-primary text-light">見てみる</a>
+                        </div>
+                        <div class="col-xl-4 col-md-6 my-2" style="text-align:center;">
+                            <a href="#" class="btn btn-warning">編集する</a>
+                        </div>
+                        <div class="col-xl-4 col-md-10 my-2" style="text-align:center;">
+                            <a href="#" class="btn btn-danger text-light">削除する</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
