@@ -64,7 +64,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" action="" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'diaryapp:update' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="hidden" name="id" class="updateDiaryId">
             <div class="modal-body">
@@ -122,7 +122,7 @@
                             </button>
                         </div>
                         <div class="col-xl-4 col-md-lg my-2" style="text-align:center;">
-                            <a href="#" class="btn btn-danger text-light">削除する</a>
+                            <a href="{% url 'diaryapp:delete' Diary.id %}" onclick="return window.confirm('本当に削除してもよろしいですか？');" class="btn btn-danger text-light">削除する</a>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
             diarytitle = btn.dataset.title;
             diaryauthor = btn.dataset.author;
             diarycontent = btn.dataset.content;
-            inputitle.value = diaryid;
+            inputid.value = diaryid;
             inputtitle.value = diarytitle;
             inputauthor.value = diaryauthor;
             inputcontent.value = diarycontent;
