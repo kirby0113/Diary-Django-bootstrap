@@ -16,3 +16,7 @@ def index(request):
         return redirect("/")
     DiaryList = Diary.objects.all()
     return render(request,"diaryapp/index.html",{"DiaryList":DiaryList})
+
+def detail(request,id):
+    diary = Diary.objects.get(id=id)
+    return render(request,"diaryapp/detail.html",{"diary":diary})
