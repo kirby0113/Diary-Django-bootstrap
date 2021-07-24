@@ -12,26 +12,27 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="POST" action="">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="modal-body">
                 <div class="form-group">
                   <label for="title">DiaryTitle</label>
                   <span class="badge badge-danger">Require</span>
-                  <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title">
                 </div>
                 <div class="form-group">
                   <label for="author">Author Name</label>
-                  <input type="text" class="form-control" id="author" placeholder="Enter AuthorName">
+                  <input type="text" class="form-control" id="author" name="author" placeholder="Enter AuthorName">
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
                     <span class="badge badge-danger">Require</span>
-                    <textarea class="form-control" id="content" placeholder="Enter Content" rows="5"></textarea>
+                    <textarea class="form-control" id="content" name="content" placeholder="Enter Content" rows="5"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="image">Select Diary Image</label>
                     <span class="badge badge-danger">Require</span>
-                    <input type="file" class="form-control-file" id="image">
+                    <input type="file" class="form-control-file" name="image" id="image">
                 </div>
             </div>
             <div class="modal-footer">
@@ -49,12 +50,12 @@
     </button>
 </div>
 <!-- index -->
-<div class="container-fluid my-4 px-5">
+<div class="container-fluid my-4 px-sm-5">
 
-    <div class="row mx-5">
+    <div class="row mx-md-5">
         {% for Diary in DiaryList %}
-        <div class="col-md-4">
-            <div class="card shadow mt-5">
+        <div class="col-xl-4 col-sm-6 align-self-center">
+            <div class="card shadow my-5" style="vertical-align:middle;">
                 <div class="card-header">
                     <span class="font-weight-bold" style="font-size:20px; letter-spacing:1.4px;">{{Diary.title}}</span>
                 </div>
@@ -65,13 +66,13 @@
                 </ul>
                 <div class="card-footer">
                     <div class="row my-2">
-                        <div class="col-md-4 my-2" style="text-align:center;">
+                        <div class="col-xl-4 col-md-6 my-2" style="text-align:center;">
                             <a href="#"class="btn btn-primary text-light">見てみる</a>
                         </div>
-                        <div class="col-md-4 my-2" style="text-align:center;">
+                        <div class="col-xl-4 col-md-6 my-2" style="text-align:center;">
                             <a href="#" class="btn btn-warning">編集する</a>
                         </div>
-                        <div class="col-md-4 my-2" style="text-align:center;">
+                        <div class="col-xl-4 col-md-10 my-2" style="text-align:center;">
                             <a href="#" class="btn btn-danger text-light">削除する</a>
                         </div>
                     </div>
