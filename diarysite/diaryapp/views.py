@@ -38,3 +38,8 @@ def update(request):
     finally:
         diary.save()
     return redirect("/")
+
+def delete(request,id):
+    diary = Diary.objects.filter(id=id).first()
+    diary.delete()
+    return redirect("/")
