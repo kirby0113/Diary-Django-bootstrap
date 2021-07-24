@@ -1,4 +1,6 @@
 {% extends "./base.html" %}
+{% load static %}
+
 
 {% block body %}
 <!--modal diaryの追加フォーム-->
@@ -49,6 +51,51 @@
         <span style="letter-spacing:1.4px; font-size:35px;">日記を追加してみる</span>
     </button>
 </div>
+
+
+<!-- modal updateform -->
+
+<div class="modal fade" id="UpdateDiaryForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalTitle">Update Diary</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="{% url 'diaryapp:update' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="id" class="updateDiaryId">
+            <div class="modal-body">
+                <div class="form-group">
+                  <label for="title">DiaryTitle</label>
+                  <span class="badge badge-danger">Require</span>
+                  <input type="text" class="form-control updateDiaryTitle" id="update-title" name="title" placeholder="Enter Title">
+                </div>
+                <div class="form-group">
+                  <label for="author">Author Name</label>
+                  <input type="text" class="form-control updateDiaryAuthor" id="update-author" name="author" placeholder="Enter AuthorName">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <span class="badge badge-danger">Require</span>
+                    <textarea class="form-control updateDiaryContent" id="update-content" name="content" placeholder="Enter Content" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Select Diary Image</label>
+                    <input type="file" class="form-control-file" name="image" id="update-image">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Diary</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 <!-- index -->
 <div class="container-fluid my-4 px-sm-5">
 
@@ -66,14 +113,16 @@
                 </ul>
                 <div class="card-footer">
                     <div class="row my-2">
-                        <div class="col-xl-4 col-md-6 my-2" style="text-align:center;">
+                        <div class="col-xl-4 col-lg-6 my-2" style="text-align:center;">
                             <a href="{% url 'diaryapp:detail' Diary.id %}"class="btn btn-primary text-light">見てみる</a>
                         </div>
-                        <div class="col-xl-4 col-md-6 my-2" style="text-align:center;">
-                            <a href="#" class="btn btn-warning">編集する</a>
+                        <div class="col-xl-4 col-lg-6 my-2" style="text-align:center;">
+                            <button data-title="{{Diary.title}}" data-author="{{Diary.author}}" data-content="{{Diary.content}}" data-id="{{Diary.id}}"type="button" class="btn btn-warning updateDiaryBtn" data-toggle="modal" data-target="#UpdateDiaryForm">
+                                <span>編集する</span>
+                            </button>
                         </div>
-                        <div class="col-xl-4 col-md-10 my-2" style="text-align:center;">
-                            <a href="#" class="btn btn-danger text-light">削除する</a>
+                        <div class="col-xl-4 col-md-lg my-2" style="text-align:center;">
+                            <a href="{% url 'diaryapp:delete' Diary.id %}" onclick="return window.confirm('本当に削除してもよろしいですか？');" class="btn btn-danger text-light">削除する</a>
                         </div>
                     </div>
                 </div>
@@ -82,4 +131,29 @@
         {% endfor %}
     </div>
 </div>
+<script type="text/javascript">
+    //特定のボタンを押した際に更新用Modalに現在のデータを反映する処理
+
+    openUpdateModalBtns = document.querySelectorAll(".updateDiaryBtn");
+
+    //formの要素たち
+    inputid = document.querySelector(".updateDiaryId");
+    inputtitle = document.querySelector(".updateDiaryTitle");
+    inputauthor = document.querySelector(".updateDiaryAuthor");
+    inputcontent = document.querySelector(".updateDiaryContent");
+
+
+    openUpdateModalBtns.forEach(btn => {
+        btn.addEventListener("click",function(){
+            diaryid = btn.dataset.id;
+            diarytitle = btn.dataset.title;
+            diaryauthor = btn.dataset.author;
+            diarycontent = btn.dataset.content;
+            inputid.value = diaryid;
+            inputtitle.value = diarytitle;
+            inputauthor.value = diaryauthor;
+            inputcontent.value = diarycontent;
+        });
+    });
+</script>
 {% endblock %}

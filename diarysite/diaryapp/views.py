@@ -20,3 +20,26 @@ def index(request):
 def detail(request,id):
     diary = Diary.objects.get(id=id)
     return render(request,"diaryapp/detail.html",{"diary":diary})
+
+def update(request):
+    id = request.POST.get("id")
+    diary = Diary.objects.filter(id=id).first()
+    diary.title = request.POST.get("title",)
+    diary.author = request.POST.get("author",)
+    diary.content = request.POST.get("content",)
+    date = datetime.date.today()
+    diary.date = date
+    try:
+        image = request.FILES['image']
+    except:
+        pass
+    else:
+        diary.image = image
+    finally:
+        diary.save()
+    return redirect("/")
+
+def delete(request,id):
+    diary = Diary.objects.filter(id=id).first()
+    diary.delete()
+    return redirect("/")
